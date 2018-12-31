@@ -59,7 +59,10 @@
 
 #define		FMT_SPACE_4 "    " 
 
-#define		REGKEY			"Use any UUID here"
+//#define		REGKEY			"Software\\{906D6D9F-AB51-429F-8816-8D33284204FF}"
+//#define		REGKEY			"Software\\{BEE2684F-3781-4372-BA18-75ECC22C3B70}"
+//#define		REGKEY			"Software\\{1a003c2f-d27f-42ca-991f-0df04f9aa72d}"
+#define		REGKEY			"Software\\{d58cb4b1-47f3-45cb-a209-f298d0c3f756}"
 
 
 #define		SSHTUNNELER 	  "plink.exe"
@@ -547,6 +550,18 @@ wyBool CheckForOnUpdate(wyString &strcreate, wyInt32 fieldpos);
 */
 wyBool GetExpressionValue(wyChar * currentrow, wyString * expression);
 
+//get the check constraint expression value by parsing the current row definition
+/**
+@param currentrow    : FIELD definiton in create table statement
+@param expression     : Value of expression used
+@returns wyTrue on success else wyFalse
+*/
+wyBool GetCheckConstraintValue(wyChar * currentrow, wyString * expression);
+wyBool GettablelevelCheckConstraintValue(wyChar * currentrow, wyString * expression);
+void  CheckForQuotesAndReplace(wyString *name);
+
+wyBool GetCheckConstraintName(wyChar * currentrow, wyString * checkconstraintname);
+
 wyInt32 GetBitFieldColumnWidth(wyString &strcreate, wyInt32 fieldpos);
 
 /// Gets the module filename length.
@@ -960,6 +975,8 @@ void	RotateBitRight(unsigned char *str);
 void    RotateBitLeft (unsigned char *str);
 
 void    RemoveDefiner(wyString &text, const wyChar* pattern, wyInt32 extra);
+
+void    RemoveBrackets(wyString &text, const wyChar* pattern);
 
 //void DebugLog(const char *buffer);
 #ifdef _WIN32
